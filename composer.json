@@ -1,11 +1,15 @@
 {
-    "name": "omisai/<package_name>",
-    "description": "<package_description>",
-    "keywords": [],
+    "name": "omisai/laravel-countries",
+    "description": "A Laravel adapter for the countries package.",
+    "keywords": [
+        "country",
+        "countries",
+        "laravel"
+    ],
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Omisai\\<package_name>\\": "src/"
+            "Omisai\\Laravel\\Countries\\": "src/"
         }
     },
     "autoload-dev": {
@@ -13,29 +17,43 @@
             "Tests\\": "tests/"
         }
     },
-    "homepage": "https://github.com/omisai-tech/<package_name>",
+    "homepage": "https://github.com/omisai-tech/laravel-countries",
     "authors": [
         {
-            "name": "<author_name>",
-            "email": "<author_email>",
+            "name": "Sándor Gergely Bornemisza",
+            "email": "bornemisza@omisai.com",
             "homepage": "https://omisai.com"
         }
     ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^11.0 || ^12.0 || ^13.0",
+        "omisai/php-countries": "^1.4"
+    },
     "require-dev": {
-        "pestphp/pest": "^4.3",
-        "laravel/pint": "^1.27"
+        "laravel/pint": "^1.27",
+        "orchestra/testbench": "^9.0 || ^10.0 || ^11.0",
+        "pestphp/pest": "^4.3"
     },
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Omisai\\Laravel\\Countries\\CountriesServiceProvider"
+            ],
+            "aliases": {
+                "Countries": "Omisai\\Laravel\\Countries\\Facades\\Countries"
+            }
         }
     },
-    "require": {
-        "php": "^8.1"
-    },
     "scripts": {
-        "test": "./vendor/bin/pest --colors=always",
-        "pint": "./vendor/laravel/pint/builds/pint"
+        "test": "pest --colors=always",
+        "lint": "pint --parallel"
     },
     "minimum-stability": "dev",
     "prefer-stable": true

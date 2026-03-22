@@ -1,27 +1,58 @@
-# <package_name>
+# Laravel Countries
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/omisai/<package_name>.svg?style=flat-square)](https://packagist.org/packages/omisai/<package_name>)
-[![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](https://github.com/sponsors/omisai-tech/LICENSE)
-[![Test](https://github.com/omisai-tech/<package_name>/actions/workflows/test.yml/badge.svg)](https://github.com/omisai-tech/<package_name>/actions/workflows/test.yml)
-[![PHP Version Require](https://img.shields.io/badge/PHP-%3E%3D8.1-blue?style=flat-square&logo=php)](https://packagist.org/packages/omisai/<package_name>)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/omisai/laravel-countries.svg?style=flat-square)](https://packagist.org/packages/omisai/laravel-countries)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 
-<package_description>
+Laravel adapter for [omisai/php-countries](https://github.com/omisai-tech/php-countries). It registers the `Omisai\Countries\Collection` in the Laravel service container and exposes it through a facade.
 
 ## Features
 
-
+- Registers `Omisai\Countries\Collection` as a singleton in the container
+- Resolves the collection by class name or the `countries` binding
+- Provides a `Countries` facade
+- Supports Laravel 11, 12, and 13
 
 ## Requirements
 
-- PHP 8.1 or higher
+- PHP 8.2+
+- Laravel 11, 12, or 13
 
+Laravel 13 requires PHP 8.3+, which is enforced by Composer through Laravel's own package constraints.
 
 ## Installation
 
 Install the package via Composer:
 
 ```bash
-composer require omisai/<package_name>
+composer require omisai/laravel-countries
+```
+
+Laravel package discovery will register the service provider and facade automatically.
+
+## Usage
+
+Resolve the collection from the container:
+
+```php
+use Omisai\Countries\Collection;
+
+$countries = app(Collection::class);
+$names = $countries->getCountriesName();
+```
+
+Resolve it by binding name:
+
+```php
+$countries = app('countries');
+```
+
+Use the facade:
+
+```php
+use Omisai\Laravel\Countries\Facades\Countries;
+
+$names = Countries::getCountriesName();
+$hungary = Countries::getCountryByAlpha2('HU');
 ```
 
 ## Testing
@@ -43,9 +74,3 @@ Please see [SECURITY.md](.github/SECURITY.md) for details on reporting security 
 ## License
 
 This package is open-sourced software licensed under the [MIT license](LICENSE).
-
-## Sponsoring
-
-If you find this package useful, please consider sponsoring the development: [Sponsoring on GitHub](https://github.com/sponsors/omisai-tech)
-
-Your support helps us maintain and improve this open-source project!

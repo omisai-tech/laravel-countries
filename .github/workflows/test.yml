@@ -24,7 +24,7 @@ jobs:
                 dependency-version: [prefer-stable]
         name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - ${{ matrix.dependency-version }}
         steps:
-            - uses: actions/checkout@v6
+            - uses: actions/checkout@v7
 
             - name: Validate composer.json and composer.lock
               run: composer validate --strict
